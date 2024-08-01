@@ -1,0 +1,32 @@
+{
+  "name": "client",
+  "version": "24.8.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 8208",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "pinia": "^2.2.0",
+    "unplugin-vue-components": "^0.27.3",
+    "vant": "^4.9.3",
+    "vue-router": "^4.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.2",
+    "@types/webpack": "^5.28.5",
+    "@vitejs/plugin-vue": "^5.1.1",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "autoprefixer": "^10.4.19",
+    "less": "^4.2.0",
+    "postcss": "^8.4.40",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.1",
+    "vue": "^3.4.35",
+    "vue-loader": "^17.4.2",
+    "vue-tsc": "^2.0.29"
+  }
+}
