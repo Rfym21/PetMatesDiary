@@ -68,7 +68,7 @@ const { images } = toRefs(swipeStore)
 const router = useRouter()
 
 const cats = () => {
-  router.push('/cats')
+  router.push({ name: 'Species', params: { type: 'cats' } })
 }
 
 
