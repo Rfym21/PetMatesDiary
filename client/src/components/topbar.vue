@@ -1,6 +1,6 @@
 <template>
   <header class="flex justify-between overflow-hidden w-full px-4 py-2 mt-2">
-    <h1 class="logo h-12"><img class="h-12" src="" alt=""></h1>
+    <h1 class="logo h-12"><img class="h-12" src="../assets/pet/pet_w_op.png" alt=""></h1>
 
     <div class="nav flex justify-end">
       <button class="search w-12 h-12"><img
