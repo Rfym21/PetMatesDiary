@@ -107,7 +107,7 @@ const onCancel = () => {
 const onSelect = (i: number) => {
   state.active = i
   if (Contents.value !== null && state.contentHeight !== null) {
-    const time = Math.floor(Math.abs(state.ContentWarpScroll.y - state.contentHeight[i + 1])) / 2
+    const time = Math.abs(Math.abs(state.ContentWarpScroll.y) - Math.abs(state.contentHeight[i + 1])) / 2
     state.ContentWarpScroll.scrollToElement(Contents.value[i], time)
   }
 }
@@ -120,7 +120,7 @@ const onWarpScroll = () => {
         if (Math.abs(position.y) >= state.contentHeight[i] && Math.abs(position.y) < state.contentHeight[i + 1]) {
           state.active = i
           if (NavBars.value !== null && state.navbarHeight !== null) {
-            const time = Math.floor(Math.abs(state.NavBarScroll.y - state.navbarHeight[i + 1])) / 10
+            const time = Math.abs(Math.abs(state.NavBarScroll.y) - Math.abs(state.navbarHeight[i + 1])) / 10
             state.NavBarScroll.scrollToElement(NavBars.value[i], time)
           }
         }

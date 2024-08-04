@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@better-scroll/core": "^2.5.1",
+    "animate.css": "^4.1.1",
+    "better-scroll": "^2.5.1",
     "pinia": "^2.2.0",
     "unplugin-vue-components": "^0.27.3",
     "vant": "^4.9.3",

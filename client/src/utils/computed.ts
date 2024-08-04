@@ -1,5 +1,5 @@
 
-function computedHeight(DOMs: HTMLElement[] | null) {
+function computedHeight(DOMs: HTMLElement[] | null) {  
   // 如果没有数据则不进行计算
   if (DOMs === null) {
     return null

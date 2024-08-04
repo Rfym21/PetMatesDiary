@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
     path: '/species/:type',
     name: 'Species',
     component: () => import('../views/SpeciesView.vue')
+  },
+  {
+    path: '/AiSearch',
+    name: 'AiSearch',
+    component: () => import('../views/AiSearchView.vue')
   }
 ]
 
