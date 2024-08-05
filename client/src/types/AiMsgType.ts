@@ -1,5 +1,5 @@
 export type AiMsgType = {
-  type: boolean | null;
+  type: string;
   role: string;
   content: string
 }

@@ -3,7 +3,7 @@
   <div class="ChatWarp animate__animated animate__zoomInDown overflow-hidden" ref="ChatWarp">
     <ul>
       <li
-        v-for="(item, i) in aiMsgStore.state.filter(n => n.role !== 'system' && (n.type === props.searchType || n.type === null))"
+        v-for="(item, i) in aiMsgStore.state.filter(n => n.role !== 'system' && (n.type === props.searchType || n.type === 'all'))"
         :key="i">
 
         <section class="animate__animated animate__rollIn px-2 py-4 w-full">
@@ -57,7 +57,7 @@ const state: State = reactive({
 })
 
 const props = defineProps<{
-  searchType: boolean | null
+  searchType: string
   images: any
 }>()
 
