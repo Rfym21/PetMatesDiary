@@ -115,7 +115,7 @@ const state = reactive<state>({
 // ----------------------------------------------------------------------------------------------------------------------------------
 onMounted(async () => {
   nextTick(async () => {
-    state.HomePageScroll = await BScrollInit(HomePageDOM.value, state.HomePageScroll, null, null)
+    state.HomePageScroll = await BScrollInit(HomePageDOM.value, state.HomePageScroll, null)
     PageInit()
   })
 })

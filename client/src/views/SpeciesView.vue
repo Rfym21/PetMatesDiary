@@ -87,8 +87,8 @@ onMounted(async () => {
   state.species = await catsStore.state
   nextTick(async () => {
     // 初始化左右两侧滚动条
-    state.NavBarScroll = await BScrollInit(NavBar.value, state.NavBarScroll, null, null)
-    state.ContentWarpScroll = await BScrollInit(ContentWarp.value, state.ContentWarpScroll, null, null)
+    state.NavBarScroll = await BScrollInit(NavBar.value, state.NavBarScroll, null)
+    state.ContentWarpScroll = await BScrollInit(ContentWarp.value, state.ContentWarpScroll, null)
 
     // 计算内容栏高度    
     state.contentHeight = await computedHeight(Contents.value)

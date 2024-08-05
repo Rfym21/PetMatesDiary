@@ -1,9 +1,10 @@
 <template>
-  <div class="ChatWarp animate__animated animate__zoomInDown w-full h-full order-1 overflow-hidden" ref="ChatWarp">
+  <header class="header"></header>
+  <div class="ChatWarp animate__animated animate__zoomInDown overflow-hidden" ref="ChatWarp">
     <ul>
       <li
         v-for="(item, i) in aiMsgStore.state.filter(n => n.role !== 'system' && (n.type === props.searchType || n.type === null))"
-        :key="i" :class="`${(i===aiMsgStore.state.length)?'mb-[12vh]':''}`">
+        :key="i">
 
         <section class="animate__animated animate__rollIn px-2 py-4 w-full">
 
@@ -31,34 +32,46 @@
                 </section> -->
 
       </li>
+      <div :class="`box ${images.length ? 'h-[24vh]' : 'h-[15vh]'}`"></div>
     </ul>
-
   </div>
+  <footer class="footer"></footer>
 </template>
 
 <script setup lang="ts">
 import useUserInfoStore from '../stores/userInfoStore'
 import useAiMsgStore from '../stores/AiMsgStore'
+import { ref, onMounted, nextTick, reactive } from 'vue'
 import { BScrollInit } from '../utils/Bsscroll'
-import { ref, watch, nextTick } from 'vue'
 
 const userInfoStore = useUserInfoStore()
 const aiMsgStore = useAiMsgStore()
 const ChatWarp = ref(null)
-let ChatWarpBScroll: any | null = null
+
+interface State {
+  ChatWarpBScroll: any
+}
+
+const state: State = reactive({
+  ChatWarpBScroll: null,
+})
 
 const props = defineProps<{
   searchType: boolean | null
+  images: any
 }>()
 
-
-watch(() => aiMsgStore.state.length, () => {
-  nextTick(() => {
-    ChatWarpBScroll = BScrollInit(ChatWarp.value, ChatWarpBScroll, null, null)
+onMounted(async () => {
+  nextTick(async () => {
+    state.ChatWarpBScroll = BScrollInit(ChatWarp.value, state.ChatWarpBScroll, null)
   })
-}, { immediate: true })
-
+})
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.ChatWarp {
+  margin-top: 7vh;
+  height: 93vh
+}
+</style>
