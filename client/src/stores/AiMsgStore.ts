@@ -19,10 +19,15 @@ const useAiMsgStore = defineStore('aiMsgStore', () => {
     state.push(...msgs)
   }
 
+  function reset() {
+    state.splice(1, state.length)
+  }
+
   return {
     state,
     addMsg,
-    addMsgs
+    addMsgs,
+    reset
   }
 
 })

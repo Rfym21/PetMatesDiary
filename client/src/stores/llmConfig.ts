@@ -10,7 +10,7 @@ interface LlmConfigType {
 const useLlmConfig = defineStore('llmConfig', () => {
   const config = ref<LlmConfigType>({
     api_url: "https://apir.me",
-    api_key: "sk-8ZNPhyKXCRUTe5xHE270A5Bd893a421e90920fB58dAa3eA4"
+    api_key: "sk-lFtSlspsYkON9iZ325C8C0B91c334222A4D114C3DbEaA5A4"
   })
 
   return {

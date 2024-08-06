@@ -23,13 +23,16 @@
 
         </section>
 
-        <!-- <section class="px-2 py-4 w-full">
+        <section class="px-2 py-4 w-full">
 
-                  <div class="message text-base leading-7 text-slate-700 rounded-xl bg-slate-200 p-3">
+          <div class="message text-base leading-7 text-slate-700 rounded-xl bg-slate-200 p-3">
+            <h1 class="text-center text-2xl font-bold">根据大模型解析</h1>
+            <h2 class="text-center text-6xl font-bold my-8 text-red-500">描述不完整</h2>
+            <p class="text-left text-lg w-11/12 mx-auto">请您补充以下信息，以便我们更好的为您提供服务</p>
+            
+          </div>
 
-                  </div>
-
-                </section> -->
+        </section>
 
       </li>
       <div :class="`box ${images.length ? 'h-[24vh]' : 'h-[15vh]'}`"></div>

@@ -28,7 +28,7 @@
     <div class="chatWarp__page" v-show="state.searchType !== 'null'">
 
       <!-- 聊天内容区域 -->
-      <div class="ChatView h-screen">
+      <div class="ChatView h-screen px-3">
         <ChatView :searchType="state.searchType" :images="state.detail.image" />
       </div>
 
@@ -67,16 +67,19 @@
 
       <van-uploader
         :class="`${(state.searchType === 'image' && state.detail.image.length === 0) ? 'mx-auto' : ''} rounded-lg overflow-hidden`"
-        v-model="state.detail.image" :preview-image="false" v-if="state.searchType === 'image'">
-        <img class="h-[5vh] w-[5vh]" src="../assets/icon/photo_btn.png" alt="">
+        v-model="state.detail.image" :preview-image="false" v-if="state.searchType === 'image'"
+        :disabled="state.sending">
+        <img class="h-[5vh] w-[5vh]" :src="`${state.sending ? image_btn_stop : image_btn}`" alt="">
       </van-uploader>
 
 
       <input type="text" class="grow h-[8vh] py-2 bg-transparent text-black text-lg placeholder:text-slate-500 pl-2"
-        placeholder="请描述宠物的特点" v-model="state.content" v-if="state.searchType === 'text' || state.imgUpload">
+        placeholder="请描述宠物的特点" v-model="state.content" v-if="state.searchType === 'text' || state.imgUpload"
+        @keydown.enter="send">
 
-      <button class="send h-full rounded-lg overflow-hidden" v-if="state.searchType === 'text' || state.imgUpload">
-        <img class="h-[5vh] w-[5vh]" src="../assets/icon/send_btn.png" alt="">
+      <button class="send h-full rounded-lg overflow-hidden" v-if="state.searchType === 'text' || state.imgUpload"
+        @click="send" :disabled="state.sending">
+        <img class="h-[5vh] w-[5vh]" :src="`${state.sending ? send_btn_stop : send_btn}`" alt="">
       </button>
 
     </div>
@@ -91,9 +94,20 @@ import { useRouter } from 'vue-router'
 import useAiMsgStore from '../stores/AiMsgStore'
 import { UserInfoType } from '../types/userInfoType'
 import ChatView from '../components/ChatView.vue'
+import usePetStore from '../stores/petStore'
+import { showDialog } from 'vant'
+
+// 资源引入
+import send_btn from '../assets/icon/send_btn.png'
+import send_btn_stop from '../assets/icon/send_btn_stop.png'
+import image_btn from '../assets/icon/photo_btn.png'
+import image_btn_stop from '../assets/icon/photo_btn_stop.png'
+import { AiSearch } from '../api/newapi'
+import { InfoVerify } from '../utils/LlmTools'
 
 const router = useRouter()
 const AiMsgStore = useAiMsgStore()
+const pet = usePetStore()
 
 interface stateType {
   searchType: string,
@@ -105,6 +119,7 @@ interface stateType {
   content: string,
   userInfo: UserInfoType | null,
   imgUpload: boolean,
+  sending: boolean
 }
 
 const state = reactive<stateType>({
@@ -117,6 +132,7 @@ const state = reactive<stateType>({
   content: '',
   userInfo: null,
   imgUpload: false,
+  sending: false
 })
 // ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -185,6 +201,29 @@ const imgUpload = () => {
     state.imgUpload = true
   }
 }
+// ----------------------------------------------------------------------------------------------------------------------------------
+// 发送消息事件
+const send = async () => {
+  // 如果用户没有输入任何内容，或者选择了图片模式没有上传图片，则不发送
+  if (state.content.trim() === '' && ((pet.state.images && pet.state.images.length === 0) || state.searchType === 'image')) {
+    showDialog({ message: "请先输入内容或上传图片" })
+    return
+  }
+
+  state.sending = true
+
+  const res = await AiSearch(state.searchType, state.content)
+
+  if (InfoVerify(res)){
+    console.log("数据完整")
+  }else{
+    console.log("数据不完整")
+    
+  }
+
+    state.sending = false
+}
+
 // ----------------------------------------------------------------------------------------------------------------------------------
 </script>
 
