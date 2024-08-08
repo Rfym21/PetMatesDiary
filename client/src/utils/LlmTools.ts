@@ -1,5 +1,8 @@
 
 const InfoVerify = (data: any) => {
+  if (data === null || data === false) {
+    return false
+  }
 
   // 检测是否有宠物信息是否完全
   for (let key in data) {

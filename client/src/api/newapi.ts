@@ -114,7 +114,7 @@ const AiSearch = async (searchType: string, messages: string | null) => {
 
       let raw = JSON.stringify({
         "model": "gemini-1.5-pro",
-        "max_tokens": 4096,
+        "max_tokens": 2048,
         "messages": [{
           "role": "user",
           "content": prompt

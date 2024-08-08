@@ -1,5 +1,5 @@
 <template>
-  <div class="page w-screen overflow-hidden">
+  <div class="page w-screen h-screen overflow-hidden">
 
     <!-- 选择搜索方式 -->
     <div class="search__type py-20" v-if="state.searchType === 'null'">
@@ -25,10 +25,10 @@
 
 
     <!-- 对话界面 -->
-    <div class="chatWarp__page" v-show="state.searchType !== 'null'">
+    <div class="chatWarp__page" v-if="state.searchType !== 'null'">
 
       <!-- 聊天内容区域 -->
-      <div class="ChatView h-screen px-3">
+      <div class="ChatView px-3">
         <ChatView :searchType="state.searchType" :images="state.detail.image" />
       </div>
 
@@ -41,7 +41,8 @@
       class="w-full h-[7vh] fixed z-20 text-2xl text-center flex items-center justify-center top-0 font-bold  bg-[rgba(255,255,255,0.7)] backdrop-blur-lg backdrop-filter"
       v-if="state.searchType !== 'null'">
       <h1>Ai智能辨宠</h1>
-      <button class="back absolute top-0 p-2 left-2 w-12 h-12 overflow-hidden hover:bg-slate-200 rounded-lg"
+      <button
+        class="back absolute -translate-y-1/2 top-1/2 p-2 left-2 w-[5vh] h-[5vh] overflow-hidden hover:bg-slate-200 rounded-lg"
         @click="router.go(-1)">
         <img class="w-full h-full" src="../assets/icon/back.png" alt="">
       </button>
@@ -73,7 +74,7 @@
       </van-uploader>
 
 
-      <input type="text" class="grow h-[8vh] py-2 bg-transparent text-black text-lg placeholder:text-slate-500 pl-2"
+      <input type="text" class="grow h-[7vh] py-2 bg-transparent text-black text-lg placeholder:text-slate-500 pl-2"
         placeholder="请描述宠物的特点" v-model="state.content" v-if="state.searchType === 'text' || state.imgUpload"
         @keydown.enter="send">
 
@@ -214,14 +215,21 @@ const send = async () => {
 
   const res = await AiSearch(state.searchType, state.content)
 
-  if (InfoVerify(res)){
+  if (InfoVerify(res)) {
     console.log("数据完整")
-  }else{
-    console.log("数据不完整")
-    
+  } else {
+    AiMsgStore.addMsg({
+      role: 'assistant',
+      type: 'text',
+      content: `
+      <h1 class="text-center font-bold text-2xl">根据大模型解析</h1>
+      <h2 class="text-center font-bold text-6xl my-8 text-red-500">描述不完整</h2>
+      <p class="text-left text-lg w-11/12 mx-auto">请您补充以下信息，以便我们更好的为您提供服务</p>
+      `
+    })
   }
 
-    state.sending = false
+  state.sending = false
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------
