@@ -104,7 +104,7 @@ import send_btn_stop from '../assets/icon/send_btn_stop.png'
 import image_btn from '../assets/icon/photo_btn.png'
 import image_btn_stop from '../assets/icon/photo_btn_stop.png'
 import { AiSearch } from '../api/newapi'
-import { InfoVerify } from '../utils/LlmTools'
+import { InfoVerify, InfoComplete } from '../utils/LlmTools'
 
 const router = useRouter()
 const AiMsgStore = useAiMsgStore()
@@ -185,17 +185,17 @@ const imgUpload = () => {
         role: 'user',
         type: 'image',
         content: `
-      <img class="w-full" src="${state.detail.image[0].content}" alt="">
+        <img class="w-full" src="${state.detail.image[0].content}" alt="">
       `
       },
       {
         role: 'assistant',
         type: 'image',
         content: `
-      <h1 class="text-center font-bold text-xl mb-2">很好，你已经上传了图片！</h1>
-      <p class="w-5/6 mx-auto leading-8">
-        请继续描述你的宠物，我们将会根据你的描述进行引导，直到我们搜集到完整的数据后，再加以分析该宠物的品种，然后给出最终的结果
-      </p>
+        <h1 class="text-center font-bold text-xl mb-2">很好，你已经上传了图片！</h1>
+        <p class="w-5/6 mx-auto leading-8">
+          请继续描述你的宠物，我们将会根据你的描述进行引导，直到我们搜集到完整的数据后，再加以分析该宠物的品种，然后给出最终的结果
+        </p>
       `
       }
     ])
@@ -218,13 +218,22 @@ const send = async () => {
   if (InfoVerify(res)) {
     console.log("数据完整")
   } else {
+    let content: any = InfoComplete(res)
+    if (content === false) {
+      showDialog({ message: "信息分析失败！" })
+      return false
+    } else {
+      content = `请您补充以下信息，以便我们更好的为您提供服务<br> ` + content.map((item: any, index: number) => `${index}. ${item}`).join('<br>')
+    }
     AiMsgStore.addMsg({
       role: 'assistant',
       type: 'text',
       content: `
       <h1 class="text-center font-bold text-2xl">根据大模型解析</h1>
       <h2 class="text-center font-bold text-6xl my-8 text-red-500">描述不完整</h2>
-      <p class="text-left text-lg w-11/12 mx-auto">请您补充以下信息，以便我们更好的为您提供服务</p>
+      <p class="text-left text-lg w-11/12 mx-auto">
+        ${content}
+      </p>
       `
     })
   }

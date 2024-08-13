@@ -85,9 +85,24 @@ const AiSearch = async (searchType: string, messages: string | null) => {
   } else {
     // 如果信息完整,则直接进行搜索
     prompt += `
-  
-    `
+    这是一份完整的宠物信息
 
+    ${state}
+    
+    请根据这份信息进行分析,你需要按照以下要求完成任务:
+    1. 分析这只宠物是什么品种,并给出多个推测,最好为前三名,需要给出品种名称,概率和推测理由,如果无法进行推测直接返回字符串"null"
+    2. 返回的信息必须是一个对象,且只输出对象,不要输出其他无关内容
+    3. 数据key不需要使用""包裹,对象数据中不要出现\n等换行符,直接返回JSON.stringify()后的数据
+
+    返回对象格式如下:
+    {
+        species: null,            // 推测品种
+        probability: null,        // 推测概率
+        reason: null              // 推测理由
+    }
+
+    如果无法进行推测,请直接返回字符串"null"
+    `
   }
 
 
