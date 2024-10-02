@@ -11,5 +11,5 @@ routerInit(app, routers)
 app.use(bodyParser())
 // 监听端口
 app.listen(config.port,()=>{
-  console.log(`http://localhost:${config.port}`)
+  console.log(`服务器在 => http://localhost:${config.port} 上启动！`)
 })
