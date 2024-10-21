@@ -1,6 +1,6 @@
 <template>
 
-
+  <h1 class="text-9xl">待开发</h1>
 
   <tabbar />
 
@@ -10,6 +10,4 @@
 import tabbar from "@/components/tabbar.vue"
 </script>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

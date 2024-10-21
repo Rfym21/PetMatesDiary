@@ -1,6 +1,6 @@
 <template>
 
-
+  <h1 class="text-9xl">待开发</h1>
 
   <tabbar />
 </template>

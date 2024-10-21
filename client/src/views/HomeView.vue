@@ -18,33 +18,36 @@
           <!-- 猫咪百科 -->
           <div class="cat flex mx-auto w-[calc(100vw-2rem)] justify-between px-1 py-2">
 
-            <div class="cat__left bg-[#ffca0c] h-36 w-7/12 mr-4">猫类知识百科</div>
+            <div class="cat__left w-2/3 mr-2 overflow-hidden shadow-xl shadow-slate-300 rounded-lg">
+              <img class="w-full h-full" src="../assets/pet/cats_zs.png" alt="">
+            </div>
 
-            <div class="cat__right bg-[#fa7e40] h-36 flex-1 rounded-lg p-2" @click="toCats">
-
-              <div class="image inline-block overflow-hidden rounded-lg w=[50%] h-[50%]">
-                <p class="block text-6xl ">😸</p>
-              </div>
-
+            <div class="cat__right w-1/3 overflow-hidden shadow-xl shadow-slate-300 rounded-lg" @click="toCats">
+              <img class="w-full h-full" src="../assets/pet/cats.png" alt="">
             </div>
 
           </div>
           <!-- 小狗百科 -->
-          <div class="dog flex mx-auto w-[calc(100vw-2rem)] justify-between px-1 py-2">
+          <div class="dog flex mx-auto w-[calc(100vw-2rem)] justify-between px-1 py-2 mb-2">
 
-            <div class="dog__left bg-[#5bad24] h-36 w-7/12 ml-4 order-2">犬类知识百科</div>
+            <div class="dog__left w-1/3 mr-2 overflow-hidden shadow-xl shadow-slate-300 rounded-lg">
+              <img class="w-full h-full" src="../assets/pet/dogs.png" alt="">
+            </div>
 
-            <div class="dog__right bg-[#467937] h-36 flex-1 order-1">犬类种类大全</div>
+            <div class="dog__right w-2/3 overflow-hidden shadow-xl shadow-slate-300 rounded-lg">
+              <img class="w-full h-full" src="../assets/pet/dogs_zs.png" alt="">
+            </div>
 
           </div>
 
           <!-- Ai宠物知识问答 -->
-          <div class="ai flex mx-auto w-[calc(100vw-2rem)] h-24 justify-between px-1 py-2 bg-lime-500 mb-2">
-            Ai宠物知识问答
+          <div class="ai flex mx-auto w-[calc(100vw-2rem)] h-32 justify-between overflow-hidden shadow-xl shadow-slate-300 mb-4 rounded-lg">
+            <img class="w-full h-full" src="../assets/pet/ai_1.png" alt="">
           </div>
           <!-- Ai辨宠 -->
-          <div class="ai flex mx-auto w-[calc(100vw-2rem)] h-24 justify-between px-1 py-2 bg-indigo-600 mb-16" @click="toAiSearch">
-            Ai辨宠
+          <div class="ai flex mx-auto w-[calc(100vw-2rem)] h-32 justify-between overflow-hidden shadow-xl shadow-slate-300 mb-16 rounded-lg"
+            @click="toAiSearch">
+            <img class="w-full h-full" src="../assets/pet/ai_2.png" alt="">
           </div>
 
           <!-- 每日小知识 -->
